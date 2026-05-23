@@ -12,14 +12,11 @@ class MyModel(BaseModel):
 
 agent = Agent(
     name="AI助手",
-    instructions="""你是一个友好的AI助手。输出时必须严格使用以下JSON字段名：
-- 姓名（字符串）
-- 年龄（整数）
-- 性别（字符串）
-- 爱好（字符串数组）
-- 事迹（字符串）
+    instructions="""你是一个友好的AI助手。必须输出JSON对象格式，包含以下字段：
 
-不要使用其他字段名，必须精确匹配上述字段。""",
+{"姓名": "张三", "年龄": 30, "性别": "男", "爱好": ["阅读", "运动"], "事迹": "简要描述"}
+
+必须输出对象格式（带字段名），不要输出数组格式。""",
     model=local_setting.openai_provider.DEFAULT_MODEL,  # 使用配置的模型
     output_type=MyModel
     ) 
