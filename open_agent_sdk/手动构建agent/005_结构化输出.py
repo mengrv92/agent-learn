@@ -34,6 +34,7 @@ async def main():
     print("性别：", obj.性别)
     print("爱好：", obj.爱好)
     print("事迹：", obj.事迹)
+    print("完整对象：", result.to_input_list())  # 打印完整对象的字典形式
     
     
 if __name__ == "__main__":
