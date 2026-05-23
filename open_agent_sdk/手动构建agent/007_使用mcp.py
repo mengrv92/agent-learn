@@ -2,7 +2,11 @@ from agents import Agent, Runner, function_tool
 import local_setting
 import asyncio
 import httpx
+import os
 from agents.mcp import MCPServerStdio
+
+# 获取脚本所在目录，用于定位相对路径的资源文件
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @function_tool
 def get_weather(latitude, longitude):
@@ -24,7 +28,7 @@ async def main():
         name="mcp demo",
         params= {
             "command": "python",  # 启动工具的命令
-            "args": ["-u", "mcp_server.py"],  # 启动工具的命令参数，-u表示不使用缓存，确保每次修改工具代码后都能生效
+            "args": ["-u", os.path.join(SCRIPT_DIR, "mcp_server.py")],  # 使用绝对路径启动 MCP server
         }
     ) as mcp_server:
         agent = Agent(
