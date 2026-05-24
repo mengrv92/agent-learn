@@ -26,10 +26,13 @@ async def main():
     
     async with MCPServerStdio(
         name="mcp demo",
-        params= {
-            "command": "python",  # 启动工具的命令
-            "args": ["-u", os.path.join(SCRIPT_DIR, "mcp_server.py")],  # 使用绝对路径启动 MCP server
-        }
+        params={
+            "command": "python",
+            "args": ["-u", os.path.join(SCRIPT_DIR, "mcp_server.py")],
+            "cwd": SCRIPT_DIR,  # 设置工作目录
+            "encoding": "utf-8",  # 设置编码
+        },
+        client_session_timeout_seconds=10,  # 增加超时时间
     ) as mcp_server:
         agent = Agent(
             name="AI助手",
